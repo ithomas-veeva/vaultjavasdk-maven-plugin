@@ -1,6 +1,8 @@
 package com.veeva.vault.sdk.vaultjavasdk;
 
 import com.veeva.vault.sdk.vaultjavasdk.utilities.PackageManager;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.IOException;
@@ -22,7 +24,8 @@ import java.util.ArrayList;
 public class PackagePlugin extends BaseMojo {
 	
 	@Override
-	public void execute() {
+	public void execute() throws MojoExecutionException, MojoFailureException {
+		super.execute();
 		
 	    ArrayList<String> filePathArray = new ArrayList<String>();
 		String parentPath = null;

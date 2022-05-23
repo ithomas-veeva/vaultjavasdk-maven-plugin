@@ -32,9 +32,6 @@ public class BaseMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-    }
-
-    public void initializeVaultClient() {
         if (vaultClientId == null) {
             System.out.println("Initializing Vault Client ID");
             vaultClientId = new VaultClientId(
@@ -43,25 +40,25 @@ public class BaseMojo extends AbstractMojo {
                     "devsupport",
                     true,
                     "mavenPlugin");
-        }
 
-        if (vaultClient == null) {
-            System.out.println("Initializing Vault Client");
-            VaultClientBuilder vaultClientBuilder = null;
-            if (password != null && !password.isEmpty()) {
-                vaultClientBuilder = VaultClientBuilder
-                        .newClientBuilder(VaultClient.AuthenticationType.BASIC)
-                        .withVaultClientId(vaultClientId)
-                        .withVaultUsername(username)
-                        .withVaultPassword(password);
-            } else if (sessionId != null && !sessionId.isEmpty()) {
-                vaultClientBuilder = VaultClientBuilder
-                        .newClientBuilder(VaultClient.AuthenticationType.SESSION_ID)
-                        .withVaultSessionId(sessionId);
+            if (vaultClient == null) {
+                System.out.println("Initializing Vault Client");
+                VaultClientBuilder vaultClientBuilder = null;
+                if (password != null && !password.isEmpty()) {
+                    vaultClientBuilder = VaultClientBuilder
+                            .newClientBuilder(VaultClient.AuthenticationType.BASIC)
+                            .withVaultClientId(vaultClientId)
+                            .withVaultUsername(username)
+                            .withVaultPassword(password);
+                } else if (sessionId != null && !sessionId.isEmpty()) {
+                    vaultClientBuilder = VaultClientBuilder
+                            .newClientBuilder(VaultClient.AuthenticationType.SESSION_ID)
+                            .withVaultSessionId(sessionId);
+                }
+                vaultClient = vaultClientBuilder.withVaultClientId(vaultClientId)
+                        .withVaultDNS(vaultDNS)
+                        .build();
             }
-            vaultClient = vaultClientBuilder.withVaultClientId(vaultClientId)
-                    .withVaultDNS(vaultDNS)
-                    .build();
         }
     }
 

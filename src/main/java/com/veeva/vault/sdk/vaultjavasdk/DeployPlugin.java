@@ -1,6 +1,8 @@
 package com.veeva.vault.sdk.vaultjavasdk;
 
 import com.veeva.vault.sdk.vaultjavasdk.utilities.PackageManager;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
 /**
@@ -11,8 +13,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class DeployPlugin extends BaseMojo {
 	
 	@Override
-	public void execute() {
-		initializeVaultClient();
+	public void execute() throws MojoExecutionException, MojoFailureException {
+		super.execute();
 		try {
 			if (vaultClient.validateSession()) {
 				//Validates, uploads, and then deploys the defined VPK to the specified vault.

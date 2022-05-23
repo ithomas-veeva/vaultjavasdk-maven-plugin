@@ -1,6 +1,8 @@
 package com.veeva.vault.sdk.vaultjavasdk;
 
 import com.veeva.vault.sdk.vaultjavasdk.utilities.PackageManager;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
 /**
@@ -11,9 +13,9 @@ import org.apache.maven.plugins.annotations.Mojo;
 @Mojo( name = "import", requiresProject = false)
 public class ImportPlugin extends BaseMojo {
 	@Override
-	public void execute() {
+	public void execute() throws MojoExecutionException, MojoFailureException {
+		super.execute();
 		//Initializes an Authentication API connection.
-		initializeVaultClient();
 
 		try {
 			if (vaultClient.validateSession()) {

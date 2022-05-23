@@ -3,6 +3,8 @@ package com.veeva.vault.sdk.vaultjavasdk;
 import com.veeva.vault.sdk.vaultjavasdk.utilities.ErrorHandler;
 import com.veeva.vault.sdk.vaultjavasdk.utilities.PackageManager;
 import com.veeva.vault.vapil.api.model.response.ValidatePackageResponse;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
 /**
@@ -14,9 +16,9 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class ValidatePlugin extends BaseMojo {
 	
 	@Override
-	public void execute() {
+	public void execute() throws MojoExecutionException, MojoFailureException {
+		super.execute();
 		//Initializes an Authentication API connection.
-		initializeVaultClient();
 		try {
 			if (vaultClient.validateSession()) {
 				//Validates the defined VPK against the specified vault.
