@@ -129,6 +129,8 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>uber-jar</shadedClassifierName>
               <artifactSet>
                 <excludes>
                   <exclude>src/test/resources</exclude>
