@@ -1,10 +1,9 @@
+vault.properties
 .settings/
 .classpath
 .gitattributes
 .project
 /target/*
-!/target/*.jar
-!/target/*.pom
 .idea
 *.iml
 /bin/

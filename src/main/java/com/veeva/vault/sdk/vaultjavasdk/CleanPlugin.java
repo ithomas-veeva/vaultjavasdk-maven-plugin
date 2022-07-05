@@ -16,7 +16,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class CleanPlugin extends BaseMojo {
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		super.execute();
 
 		if (PackageManager.cleanPackageDirectory()) {
 			System.out.println("Deployment folder contents deleted.");

@@ -1,8 +1,8 @@
 package com.veeva.vault.sdk.vaultjavasdk;
 
-import java.util.ArrayList;
-
 import org.apache.maven.plugins.annotations.Parameter;
+
+import java.util.ArrayList;
 
 public class Source {
 	@Parameter( property = "source.packages", defaultValue = "" )

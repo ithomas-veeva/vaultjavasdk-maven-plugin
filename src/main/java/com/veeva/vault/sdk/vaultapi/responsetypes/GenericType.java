@@ -1,7 +1,6 @@
 package com.veeva.vault.sdk.vaultapi.responsetypes;
 
 import java.lang.reflect.Field;
-import java.util.logging.Level;
 
 
 //Abstract object parent 
