@@ -32,6 +32,15 @@ public class BaseMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        if (vaultClientId == null) {
+            System.out.println("Initializing Vault Client ID");
+            vaultClientId = new VaultClientId(
+                    "veeva",
+                    "vault",
+                    "devsupport",
+                    true,
+                    "mavenPlugin");
+        }
     }
 
     public void initializeVaultClient() {
