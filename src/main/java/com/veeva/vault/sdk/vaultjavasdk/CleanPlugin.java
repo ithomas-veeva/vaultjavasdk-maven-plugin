@@ -4,6 +4,9 @@ import com.veeva.vault.sdk.vaultjavasdk.utilities.PackageManager;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
+import com.veeva.vault.vapil.api.client.VaultClient;
+import com.veeva.vault.vapil.api.client.VaultClientBuilder;
+import com.veeva.vault.vapil.api.client.VaultClientId;
 
 /**
  * Goal that deletes all files in the “deployment” folder in the maven project. .
