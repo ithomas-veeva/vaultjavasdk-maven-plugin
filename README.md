@@ -1,6 +1,6 @@
 # Vault Java SDK Maven Plugin
 
-This Maven plugin provides an easy-to-use set of commands to package, validate, import, and deploy Vault Java SDK source code through the use of defined Maven goals.
+This Maven plugin provides a set of easy-to-use commands that allow you to package, validate, import, and deploy Vault Java SDK source code by using defined Maven goals.
 
 ## Prerequisites
 1. [Download](https://maven.apache.org/download.cgi) and [Install](https://maven.apache.org/install.html) Maven.
@@ -12,7 +12,7 @@ To make the Maven plugin available in a Vault Java SDK project, add the followin
 Configuration Parameters:    
 
 ```
-<vaultDNS> - a vault’s DNS host name (e.g. vaulturl.veevavault.com with no HTTPS://)
+<vaultDNS> - a vault’s DNS host name with no HTTPS://. For example, vaulturl.veevavault.com
 <username> - the vault user name to use for authentication required for using the import, deploy, and validate goals
 <password> - the password for user specified in <username>. As a best practice, input the password through the command line or via an IDE build parameter. Avoid saving the password in the pom.xml file 
 <sessionId> - optional, an authenticated live user session id used instead of providing userName/password credentials
@@ -22,7 +22,7 @@ Configuration Parameters:
 	<packages> - comma separated list of package names from the project
 	<classes> - comma separated list of fully qualified java file names
 	
-* In general, you should avoid saving the password in the pom.xml file when possible. 
+* Avoid saving the password in the pom.xml file when possible. 
 ```
 
 The pom.xml configuration:
@@ -64,9 +64,9 @@ The pom.xml configuration:
 
 ## Maven Goals 
 
-The following goals are provided by the plugin.
+The following goals:
 
-* **vaultjavasdk:clean** - removes all files in the “deployment” folder in the maven project. This folder contains VPK files and vaultpackage.xml file created by this plugin. 
+* **vaultjavasdk:clean** - removes all files in the *deployment* folder in the maven project. This folder contains VPK files and vaultpackage.xml file created by this plugin. 
 
 * **vaultjavasdk:package** - generates a VPK file in the "deployment/packages" directory. 
     * VPK file name format: code_package_{mm-dd-yyyy}_{num}.vpk
@@ -88,22 +88,30 @@ The following goals are provided by the plugin.
 3. The **package** goal is run separately from the import, deploy, and validate goals. This means that any code changes will require a "vaultjavasdk:package" before running an import, deploy, or validate if you want to pick up the latest code.
 
 
-## How to run
+## Running Goals
 
-You can either configure the goals in your IDE or run them directly through the Maven command line. The following example is for running the **clean**, **package**, and then **deploy** goals through the command line when the parameters are not configured in the pom.xml:
-* Navigate to your project's base directory (where the pom.xml is located) and execute the following:
+You can either configure the goals in your IDE or run them directly through the Maven command line. To run goals from the command line, 
+navigate to your project's base directory, which is where the pom.xml file is located.
    
     > mvn vaultjavasdk:clean vaultjavasdk:package vaultjavasdk:deploy -Dusername=test@user.com -Dpassword=test0000 -DvaultDNS=testurl.veevavault.com
-    
-### Other Goal Examples
 
-* Custom VPK package
+The following example deploys a custom VPK package:
 
     > mvn vaultjavasdk:deploy -Dpackage=custom_package.vpk -Dusername=test@user.com -Dpassword=test0000 -DvaultDNS=testurl.veevavault.com  
     
-* Import and then Deploy
+The following example imports and then deploys a package when the parameters are not configured in the pom.xml. First, import and validate the last modified package:
 
     > mvn vaultjavasdk:import -Dusername=test@user.com -Dpassword=test0000 -DvaultDNS=testurl.veevavault.com  
+
+Save the *Package ID* from the import response:
+
+    > Import Package Request: https://testurl.veevavault.com/api/v18.3/services/package   
+    Package: {{PROJECT_DIRECTORY_PATH}}\deployment\packages\code_package_xxxx-xx-xx.vpk
+    Successfully imported [{{PROJECT_DIRECTORY_PATH}}\deployment\packages\code_package_xxxx-xx-xx.vpk]
+    Package Name: PKG-project-name
+    Package Id: 0PI000000000XXX
+
+Now you can use the saved *Package ID* to deploy the package:
 
     > mvn vaultjavasdk:deploy -DpackageId=0PI000000000XXX -Dusername=test@user.com -Dpassword=test0000 -DvaultDNS=testurl.veevavault.com 
     
