@@ -1,4 +1,5 @@
 package com.veeva.vault.sdk.vaultapi.responsetypes;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Map;
 
